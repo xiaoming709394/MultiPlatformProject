@@ -1,22 +1,28 @@
-﻿@page "/"
-
-@* <h1>Hello, world!</h1>
-
-Welcome to your new app. *@
+﻿@page "/dashboard"
+@using ZXingBlazor.Components
 
 <Container>
     <MRow>
-        <h1>Hello, world!</h1>
+        @*<h1>Hello, world!</h1>*@
 
-        Welcome to your new app.
+        @*Welcome to your new app.*@
 
-        <SurveyPrompt Title="How is Blazor working for you?" />
+        @*<SurveyPrompt Title="How is Blazor working for you?" />*@
+
+        <BarcodeReader ScanResult="OnResult"
+                       Close="(()=>ShowScanBarcode=!ShowScanBarcode)"
+                       Decodeonce="false" />
+
+        <pre>
+            @result
+        </pre>
+
 
         <MBottomNavigation @bind-Value="value"
                            Color="teal"
-                                  Fixed
+                           Fixed
                            Style="display:flex"
-                                  Grow>
+                           Grow>
             <MButton>
                 <span>Recents</span>
                 <MIcon>mdi-history</MIcon>
@@ -38,4 +44,15 @@ Welcome to your new app. *@
 
 @code {
     StringNumber value = 1;
+
+
+    string result;
+    bool ShowScanBarcode = true;
+
+    private Task OnResult(string message)
+    {
+        result += message + Environment.NewLine;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
 }

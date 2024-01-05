@@ -14,31 +14,30 @@
             <MIcon>mdi-magnify</MIcon>
         </MButton>
 
-        <MMenu Left
-               Bottom>
+        <MMenu Left Bottom>
             <ActivatorContent>
                 <MButton Icon @attributes="@context.Attrs">
-                    <MIcon>mdi-dots-vertical</MIcon>
-                </MButton>
-            </ActivatorContent>
-            <ChildContent>
-                <MList>
-                    @for (var i = 0; i < 5; i++)
-                            {
-                    var n = i + 1;
-                    <MListItem @key="n"
-                               OnClick="() => {}">
-                        <MListItemTitle>Option @n</MListItemTitle>
-                        </MListItem>
-                            }
+                     <MIcon>mdi-dots-vertical</MIcon>
+                 </MButton>
+             </ActivatorContent>
+             <ChildContent>
+                 <MList>
+                     @for (var i = 0; i < 5; i++)
+                    {
+                        var n = i + 1;
+                        <MListItem @key="n"
+                                   OnClick="() => {}">
+                            <MListItemTitle>Option @n</MListItemTitle>
+                            </MListItem>
+                    }
                 </MList>
             </ChildContent>
         </MMenu>
     </MAppBar>
 
     <MNavigationDrawer App @bind-Value="_drawer">
-        <MList Nav Routable>
-            <MListItem Href="/" ActiveClass="primary--text">
+         <MList Nav Routable>
+            <MListItem Href="/dashboard" ActiveClass="primary--text">
                 <MListItemIcon>
                     <MIcon>mdi-home</MIcon>
                 </MListItemIcon>
@@ -54,12 +53,12 @@
                     <MListItemTitle>Counter</MListItemTitle>
                 </MListItemContent>
             </MListItem>
-            <MListItem Href="/weather" ActiveClass="primary--text">
+            <MListItem Href="/fetchdata" ActiveClass="primary--text">
                 <MListItemIcon>
                     <MIcon>mdi-list-box</MIcon>
                 </MListItemIcon>
                 <MListItemContent>
-                    <MListItemTitle>weather</MListItemTitle>
+                    <MListItemTitle>fetchdata</MListItemTitle>
                 </MListItemContent>
             </MListItem>
         </MList>

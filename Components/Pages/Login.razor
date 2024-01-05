@@ -1,0 +1,49 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using FluentValidation;
+@inject IPopupService PopupService
+@inject NavigationManager _navManager
+
+@page "/"
+<h3>Login</h3>
+
+<MForm Model="_model" EnableValidation OnValidSubmit="HandleOnValidSubmit"
+        OnInvalidSubmit="HandleOnInvalidSubmit">
+     <MTextField @bind-Value="_model.Email" Label="E-mail">
+     </MTextField>
+     <MTextField @bind-Value="_model.Password" Label="Password" Type="password">
+     </MTextField>
+     <MButton Type="submit" Style="margin-top:10px">Submit</MButton>
+ </MForm>
+
+ @code {
+    class Model
+    {
+        // [Required]
+        // [MaxLength(10, ErrorMessage = "Name must be less than 10 characters")]
+        // public string Name { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        // [Required]
+        // public string Item { get; set; }
+        // [RegularExpression("True", ErrorMessage = "You must agree to continue!")]
+        // public bool Agree { get; set; }
+        [Required]
+        public string Password { get; set; }
+    }
+
+    private bool _valid = true;
+    private MForm _form;
+    private Model _model = new();
+
+    private async Task HandleOnValidSubmit()
+    {
+        _navManager.NavigateTo("/dashboard");
+        PopupService.EnqueueSnackbarAsync("登录成功", AlertTypes.Success);
+    }
+
+    private Task HandleOnInvalidSubmit()
+    {
+        return PopupService.EnqueueSnackbarAsync("报错了", AlertTypes.Error);
+    }
+}
